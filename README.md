@@ -19,3 +19,24 @@ From the command prompt go to your app's root folder and execute:
 tns plugin add nativescript-dna-netservices
 ```
 This command automatically installs the necessary files, as well as stores **nativescript-dna-netservices** as a dependency in your project's package.json file.
+
+## API
+
+NativeScript DNA NetServices APIs are classified into the following services:
+- **NetworkMonitorService**: Provides APIs for monitoring network availability and accessing device IP address
+- **ZeroConfService**: Deals with resolving and publication part of Bonjour/ZeroConf 
+- **ZeroConfServiceBrowser**: Involves with browsing part of Bonjour/ZeroConf
+
+In the following sections, we will explore various APIs under various services.
+
+##### NetworkMonitorService
+for example.
+	
+	```javascript
+    Usage code snippets here
+    ```)
+
+
+## License
+
+Apache License Version 2.0, January 2004
