@@ -18,3 +18,4 @@ From the command prompt go to your app's root folder and execute:
 ```javascript
 tns plugin add nativescript-dna-netservices
 ```
+This command automatically installs the necessary files, as well as stores **nativescript-dna-netservices** as a dependency in your project's package.json file.
