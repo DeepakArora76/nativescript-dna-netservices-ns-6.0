@@ -33,7 +33,7 @@ NativeScript DNA NetServices APIs are classified into the following services:
 In the following sections, we will explore various APIs under various services.
 
 ### - NetworkMonitorService
-JavaScript flavored version looks like:
+Typescript flavored version looks like:
 ```javascript
 import { NetworkMonitorService } from "nativescript-dna-netservices";
 ```
