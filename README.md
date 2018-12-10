@@ -23,7 +23,8 @@ tns plugin add nativescript-dna-netservices
 ```
 This command automatically installs the necessary files, as well as stores **nativescript-dna-netservices** as a dependency in your project's package.json file.
 
-## API 
+## API
+
 NativeScript DNA NetServices APIs are classified into the following services:
 - **NetworkMonitorService**: Provides APIs for monitoring network availability and accessing device IP address
 - **ZeroConfService**: Deals with service resolution and publication part of Bonjour/ZeroConf 
@@ -31,8 +32,24 @@ NativeScript DNA NetServices APIs are classified into the following services:
 
 In the following sections, we will explore various APIs under various services.
 
-### NetworkMonitorService
+### - NetworkMonitorService
+JavaScript flavored version looks like:
+```javascript
+import { NetworkMonitorService } from "nativescript-dna-netservices";
+```
 
+JavaScript flavored version looks like:
+```javascript
+var NetworkMonitorService = require("nativescript-dna-netservices");
+```
+
+```javascript
+NetworkMonitorService.getWiFiIpAddress()
+.pipe(tap(ip => console.info(ip)))
+.subscribe(ipAddr => {
+  console.info(ipAddr)
+});
+```
 
 ## License
 
