@@ -26,8 +26,8 @@ This command automatically installs the necessary files, as well as stores **nat
 ## API 
 NativeScript DNA NetServices APIs are classified into the following services:
 - **NetworkMonitorService**: Provides APIs for monitoring network availability and accessing device IP address
-- **ZeroConfService**: Deals with resolving and publication part of Bonjour/ZeroConf 
-- **ZeroConfServiceBrowser**: Involves with browsing part of Bonjour/ZeroConf
+- **ZeroConfService**: Deals with service resolution and publication part of Bonjour/ZeroConf 
+- **ZeroConfServiceBrowser**: Involves with service browsing part of Bonjour/ZeroConf
 
 In the following sections, we will explore various APIs under various services.
 
