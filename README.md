@@ -1,4 +1,4 @@
-# NativeScript DNA Services
+# NativeScript DNA NetServices
 
 ![nativescript-dna-netservices](https://raw.githubusercontent.com/DeepakArora76/nativescript-dna-netservices/master/dna-netservices.png)
 
