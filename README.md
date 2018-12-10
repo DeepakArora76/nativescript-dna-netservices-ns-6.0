@@ -30,7 +30,7 @@ NativeScript DNA NetServices APIs are classified into the following services:
 
 In the following sections, we will explore various APIs under various services.
 
-#### NetworkMonitorService
+### NetworkMoitorService
 
 
 ## License
