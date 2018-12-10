@@ -10,3 +10,11 @@ NativeScript plugin for Bonjour/ZeroConf and network monitor. RxJS based APIs fo
 - Service Discovery, Resolution, Browse, and Publication
 - Monitor network availability
 - WiFi and Cellular IP address retrieval
+
+## Installation
+
+From the command prompt go to your app's root folder and execute:
+
+```javascript
+tns plugin add nativescript-dna-netservices
+```
