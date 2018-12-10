@@ -6,6 +6,7 @@ NativeScript plugin for Bonjour/ZeroConf and network monitor. RxJS based APIs fo
 
 ### Features
 
+- Cross platform APIs for Android and iOS
 - Service Discovery, Resolution, Browse, and Publication
 - Monitor network availability
 - WiFi and Cellular IP address retrieval
