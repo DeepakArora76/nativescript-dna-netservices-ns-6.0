@@ -27,14 +27,10 @@ NativeScript DNA NetServices APIs are classified into the following services:
 - **ZeroConfService**: Deals with resolving and publication part of Bonjour/ZeroConf 
 - **ZeroConfServiceBrowser**: Involves with browsing part of Bonjour/ZeroConf
 
+
 In the following sections, we will explore various APIs under various services.
 
 ##### NetworkMonitorService
-for example.
-	
-	```javascript
-    Usage code snippets here
-    ```)
 
 
 ## License
