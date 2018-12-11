@@ -43,8 +43,7 @@ JavaScript
 ```javascript
 var NetworkMonitorService = require("nativescript-dna-netservices");
 ```
- #### getWiFiIpAddress:
-Retrieves IPv4 address of a device assigned with on a WiFi network.
+**getWiFiIpAddress**: Retrieves IPv4 address of a device assigned with on a WiFi network.
 ```javascript
 NetworkMonitorService.getWiFiIpAddress().subscribe(
   ipAddr => console.info(ipAddr),
@@ -53,8 +52,7 @@ NetworkMonitorService.getWiFiIpAddress().subscribe(
 );
 ```
 
-#### getCellularIpAddress:
-Provides a cellular IPv4 address one assigned by a cellular carrier. It's not a public IP address.
+**getCellularIpAddress**: Provides a cellular IPv4 address one assigned by a cellular carrier. It's not a public IP address.
 ```javascript
 NetworkMonitorService.getCellularIpAddress().subscribe(
   ipAddr => console.info(ipAddr),
