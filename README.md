@@ -44,7 +44,7 @@ JavaScript
 var NetworkMonitorService = require("nativescript-dna-netservices");
 ```
  #### getWiFiIpAddress
- Retrieves a WiFi IPv4 address a device is assigned on a WiFi network.
+Retrieves IPv4 address of a device assigned with on a WiFi network.
 ```javascript
 NetworkMonitorService.getWiFiIpAddress().subscribe(
   ipAddr => console.info(ipAddr),
