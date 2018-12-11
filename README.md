@@ -93,6 +93,23 @@ const networkStatusSubscription = NetworkMonitorService.monitorNetwork()
   console.info(connType, ns.ipAddress);
 });
 ```
+
+### - ZeroConfService
+Depending on the framework, NetworkMonitorService can be imported in one of the following ways:
+
+TypeScript:
+```javascript
+import { ZeroConfService } from "nativescript-dna-netservices";
+```
+JavaScript:
+```javascript
+var ZeroConfService = require("nativescript-dna-netservices");
+```
+
+Below are the APIs available in ZeroConfService:
+
+
+
 ## License
 
 Apache License Version 2.0, January 2004
