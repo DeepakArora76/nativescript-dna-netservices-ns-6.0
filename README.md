@@ -74,10 +74,10 @@ NetworkMonitorService.getNetworkStatus().subscribe(
 );
 ```
 
-**monitorNetwork**: It tracks and notifies of any changes in network. If for some reason the device is not on a network, then the status would be an empty address with the connection type **none**.
+**monitorNetwork**: It tracks and notifies of any changes in network condition. If for some reason the device is not on a network, then the status would be an empty address with the connection type **none**.
 
 ```javascript
-this.networkStatusSubscription = NetworkMonitorService.monitorNetwork()
+const networkStatusSubscription = NetworkMonitorService.monitorNetwork()
 .subscribe(ns => {
   let connType = "";
   switch (ns.connType) {
@@ -90,7 +90,7 @@ this.networkStatusSubscription = NetworkMonitorService.monitorNetwork()
     default:
       connType = "Unavailable";
   }
-  this.set("networkStatus", connType + ": " + ns.ipAddress);
+  console.info(connType, ns.ipAddress);
 });
 ```
 ## License
