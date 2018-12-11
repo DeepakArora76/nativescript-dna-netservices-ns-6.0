@@ -30,25 +30,27 @@ NativeScript DNA NetServices APIs are classified into the following services:
 - **ZeroConfService**: Deals with service resolution and publication part of Bonjour/ZeroConf 
 - **ZeroConfServiceBrowser**: Involves with service browsing part of Bonjour/ZeroConf
 
-In the following sections, we will explore various APIs under various services.
+Each of these services with their APIs are covered below.
 
 ### - NetworkMonitorService
-TypeScript flavored version looks like:
+Depending on the framework, NetworkMonitorService can be imported in one of the following ways:
+
+TypeScript
 ```javascript
 import { NetworkMonitorService } from "nativescript-dna-netservices";
 ```
-
-JavaScript flavored version looks like:
+JavaScript
 ```javascript
 var NetworkMonitorService = require("nativescript-dna-netservices");
 ```
-
+ #### getWiFiIpAddress
+ This API can be used to retreive IPv4 address of a device when connected to WiFi network.
 ```javascript
-    NetworkMonitorService.getWiFiIpAddress().subscribe(
-      ipAddr => console.info(ipAddr),
-      err => console.error(err),
-      () => console.log("completed")
-    );
+NetworkMonitorService.getWiFiIpAddress().subscribe(
+  ipAddr => console.info(ipAddr),
+  err => console.error(err),
+  () => console.log("completed")
+);
 ```
 
 ## License
