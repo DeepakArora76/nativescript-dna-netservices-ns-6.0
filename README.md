@@ -6,7 +6,7 @@ NativeScript plugin for Bonjour/ZeroConf and network monitor. RxJS based APIs fo
 
 ### Features
 
-- Cross platform APIs for Android and iOS
+- Cross-platform APIs for Android and iOS
 - Service Discovery, Resolution, Browse, and Publication
 - Monitor network availability
 - WiFi and Cellular IP address retrieval
@@ -30,7 +30,7 @@ NativeScript DNA NetServices APIs are classified into the following services:
 - **ZeroConfService**: Deals with service resolution and publication part of Bonjour/ZeroConf 
 - **ZeroConfServiceBrowser**: Involves with service browsing part of Bonjour/ZeroConf
 
-Each of these services with their APIs are covered below.
+Each of these services with their APIs is covered below.
 
 ### - NetworkMonitorService
 Depending on the framework, NetworkMonitorService can be imported in one of the following ways:
@@ -72,6 +72,26 @@ NetworkMonitorService.getNetworkStatus().subscribe(
   err => console.error(err),
   () => console.log("completed")
 );
+```
+
+**monitorNetwork**: It tracks and notifies of any changes in network. If for some reason the device is not on a network, then the status would be an empty address with the connection type **none**.
+
+```javascript
+this.networkStatusSubscription = NetworkMonitorService.monitorNetwork()
+.subscribe(ns => {
+  let connType = "";
+  switch (ns.connType) {
+    case networkType.wifi:
+      connType = "WiFi";
+      break;
+    case networkType.cellular:
+      connType = "Cellular";
+      break;
+    default:
+      connType = "Unavailable";
+  }
+  this.set("networkStatus", connType + ": " + ns.ipAddress);
+});
 ```
 ## License
 
