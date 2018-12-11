@@ -35,14 +35,17 @@ Each of these services with their APIs are covered below.
 ### - NetworkMonitorService
 Depending on the framework, NetworkMonitorService can be imported in one of the following ways:
 
-TypeScript
+TypeScript:
 ```javascript
 import { NetworkMonitorService } from "nativescript-dna-netservices";
 ```
-JavaScript
+JavaScript:
 ```javascript
 var NetworkMonitorService = require("nativescript-dna-netservices");
 ```
+
+Below are the APIs available in NetworkMonitorService: 
+
 **getWiFiIpAddress**: Retrieves IPv4 address of a device assigned with on a WiFi network.
 ```javascript
 NetworkMonitorService.getWiFiIpAddress().subscribe(
