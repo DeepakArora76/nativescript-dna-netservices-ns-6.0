@@ -32,7 +32,7 @@ NativeScript DNA NetServices APIs are classified into the following services:
 
 Each of these services with their APIs are covered below.
 
-> ### - NetworkMonitorService
+### - NetworkMonitorService
 Depending on the framework, NetworkMonitorService can be imported in one of the following ways:
 
 TypeScript:
@@ -94,7 +94,7 @@ const networkStatusSubscription = NetworkMonitorService.monitorNetwork()
 });
 ```
 
-> ### - ZeroConfService
+### - ZeroConfService
 Depending on the framework, NetworkMonitorService can be imported in one of the following ways:
 
 TypeScript:
