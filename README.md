@@ -33,7 +33,7 @@ NativeScript DNA NetServices APIs are classified into the following services:
 In the following sections, we will explore various APIs under various services.
 
 ### - NetworkMonitorService
-Typescript flavored version looks like:
+TypeScript flavored version looks like:
 ```javascript
 import { NetworkMonitorService } from "nativescript-dna-netservices";
 ```
@@ -44,11 +44,11 @@ var NetworkMonitorService = require("nativescript-dna-netservices");
 ```
 
 ```javascript
-NetworkMonitorService.getWiFiIpAddress()
-.pipe(tap(ip => console.info(ip)))
-.subscribe(ipAddr => {
-  console.info(ipAddr)
-});
+    NetworkMonitorService.getWiFiIpAddress().subscribe(
+      ipAddr => console.info(ipAddr),
+      err => console.error(err),
+      () => console.log("completed")
+    );
 ```
 
 ## License
