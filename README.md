@@ -63,6 +63,16 @@ NetworkMonitorService.getCellularIpAddress().subscribe(
   () => console.log("completed")
 );
 ```
+
+**getNetworkStatus**: Depending on a network type a device is connected with, it gets network status which includes connection type (wifi, cellular, or none) and IPv4 address. If for some reason the device is not on a network, then the status would be an empty address with connection type **none**.
+
+```javascript
+NetworkMonitorService.getNetworkStatus().subscribe(
+  networkStatus => console.info(networkStatus.connType, networkStatus.ipAddress),
+  err => console.error(err),
+  () => console.log("completed")
+);
+```
 ## License
 
 Apache License Version 2.0, January 2004
