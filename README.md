@@ -64,7 +64,7 @@ NetworkMonitorService.getCellularIpAddress().subscribe(
 );
 ```
 
-**getNetworkStatus**: Depending on a network type a device is connected with, it gets network status which includes connection type (wifi, cellular, or none) and IPv4 address. If for some reason the device is not on a network, then the status would be an empty address with connection type **none**.
+- **getNetworkStatus**: Depending on a network type a device is connected with, it gets network status which includes connection type (wifi, cellular, or none) and IPv4 address. If for some reason the device is not on a network, then the status would be an empty address with connection type **none**.
 
 ```javascript
 NetworkMonitorService.getNetworkStatus().subscribe(
