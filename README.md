@@ -55,7 +55,7 @@ NetworkMonitorService.getWiFiIpAddress().subscribe(
 );
 ```
 
-**getCellularIpAddress**: Gets a cellular IPv4 address assigned to a device by a mobile carrier. It's not a public IP address.
+**getCellularIpAddress**: Gets IPv4 address a device uses for communication a mobile/cellular network. It's not a public IP address.
 ```javascript
 NetworkMonitorService.getCellularIpAddress().subscribe(
   ipAddr => console.info(ipAddr),
@@ -74,7 +74,7 @@ NetworkMonitorService.getNetworkStatus().subscribe(
 );
 ```
 
-**monitorNetwork**: It tracks and notifies of any changes in network condition. If for some reason the device is not on a network, then the status would be an empty address with the connection type **none**.
+**monitorNetwork**: It tracks and notifies of any changes in network condition a device sees. If for some reason the device is not on a network, then the status would be an empty address with the connection type **none**.
 
 ```javascript
 const networkStatusSubscription = NetworkMonitorService.monitorNetwork()
