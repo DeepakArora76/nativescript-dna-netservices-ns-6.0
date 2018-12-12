@@ -108,9 +108,9 @@ JavaScript:
 var ZeroConfService = require("nativescript-dna-netservices");
 ```
 
-Below are the APIs available in ZeroConfService:
+Below are the APIs offered by ZeroConfService:
 
-**publish**: Provides a convenient way for publishing a network service of type **type** at the socket location specified by **domain**, **name**, and **port**.
+**publish**: Provides a convenient way for publishing a network service of type *type* at the socket location specified by *domain*, *name*, and *port*.
 
 
 ## License
