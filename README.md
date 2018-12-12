@@ -46,7 +46,7 @@ var NetworkMonitorService = require("nativescript-dna-netservices");
 
 Below are the APIs available in NetworkMonitorService: 
 
-**getWiFiIpAddress**: Retrieves IPv4 address a device uses for communication on a WiFi network.
+**getWiFiIpAddress**: Retrieves IPv4 address a device uses for communication in a WiFi network.
 ```javascript
 NetworkMonitorService.getWiFiIpAddress().subscribe(
   ipAddr => console.info(ipAddr),
@@ -55,7 +55,7 @@ NetworkMonitorService.getWiFiIpAddress().subscribe(
 );
 ```
 
-**getCellularIpAddress**: Gets IPv4 address a device uses for communication a mobile/cellular network. It's not a public IP address.
+**getCellularIpAddress**: Gets IPv4 address a device uses for communication in a mobile/cellular network. It's not a public IP address.
 ```javascript
 NetworkMonitorService.getCellularIpAddress().subscribe(
   ipAddr => console.info(ipAddr),
