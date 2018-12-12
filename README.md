@@ -33,7 +33,7 @@ NativeScript DNA NetServices APIs are classified into the following services:
 Each of these services with their APIs is covered below.
 
 ### - NetworkMonitorService
-Depending on the framework, NetworkMonitorService can be imported in one of the following ways:
+Depending on the type of framework, NetworkMonitorService can be imported using one of the following ways:
 
 TypeScript:
 ```javascript
@@ -97,7 +97,7 @@ const networkStatusSubscription = NetworkMonitorService.monitorNetwork()
 ### - ZeroConfService
 The ZeroConfService class represents a network service, either one your application publishes or is a client of. This class uses multicast DNS to convey information about network services to and from your application.
 
-Depending on the framework, ZeroConfService can be imported in one of the following ways:
+Depending on the type of framework, ZeroConfService can be imported using one of the following ways:
 
 TypeScript:
 ```javascript
@@ -124,7 +124,7 @@ const registrationSubscription = zeroConfService
   .subscribe(data => console.info(data), error => console.error(error));
 ```
 
-In the above example, if the specified port is 0, **publish** API will use one of the available free port in the system. In the event of an error, an event data contains **zeroConfError** error code.
+In the above example, if the specified port is 0, **publish** API will use one of the available free port in the system. In the event of an error, an event data contains **zeroConfError** error code. **zeroConfError** can be imported using one of the above-mentioned ways from **nativescript-dna-netservices**.
 
 ## License
 
