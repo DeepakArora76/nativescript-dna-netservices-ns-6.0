@@ -124,7 +124,7 @@ const registrationSubscription = zeroConfService
   .subscribe(data => console.info(data), error => console.error(error));
 ```
 
-In the above example, if the specified port is 0, **publish** API will use one of the available free port in the system. In the event of error, an error code of type **zeroConfError** comes as an event data.
+In the above example, if the specified port is 0, **publish** API will use one of the available free port in the system. In the event of an error, an event data contains **zeroConfError** error code.
 
 ## License
 
