@@ -112,6 +112,19 @@ Below are the APIs offered by ZeroConfService:
 
 **publish**: Provides a convenient way for publishing a network service of type *type* at the socket location specified by *domain*, *name*, and *port*.
 
+```javascript
+const zeroConfService = new ZeroConfService();
+const registrationSubscription = zeroConfService
+  .publish({
+    domain: "local.",
+    type: "_my_special_radio_service._tcp.",
+    name: "Radio Service",
+    port: 61234
+  })
+  .subscribe(data => console.info(data), error => console.error(error));
+```
+
+In the above example, if the specified port is 0, **publish** API will use one of the available free port in the system. In the event of error, an error code of type **zeroConfError** comes as an event data.
 
 ## License
 
