@@ -26,7 +26,7 @@ This command automatically installs the necessary files, as well as stores **nat
 ## API
 
 NativeScript DNA NetServices APIs are classified into the following services:
-- **NetworkMonitorService**: Provides APIs for monitoring network availability and accessing device IP address
+- **NetworkMonitorService**: Provides API for monitoring network availability and accessing device IP address
 - **ZeroConfService**: Deals with service resolution and publication part of Bonjour/ZeroConf 
 - **ZeroConfServiceBrowser**: Involves with service browsing part of Bonjour/ZeroConf
 
@@ -95,6 +95,8 @@ const networkStatusSubscription = NetworkMonitorService.monitorNetwork()
 ```
 
 ### - ZeroConfService
+The ZeroConfService class represents a network service, either one your application publishes or is a client of. This class uses multicast DNS to convey information about network services to and from your application.
+
 Depending on the framework, ZeroConfService can be imported in one of the following ways:
 
 TypeScript:
@@ -108,6 +110,7 @@ var ZeroConfService = require("nativescript-dna-netservices");
 
 Below are the APIs available in ZeroConfService:
 
+**publish**: Provides a convenient way for publishing a network service of type **type** at the socket location specified by **domain**, **name**, and **port**.
 
 
 ## License
