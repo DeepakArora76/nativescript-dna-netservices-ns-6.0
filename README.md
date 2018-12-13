@@ -128,6 +128,19 @@ Note: The API will use one of the available free port in the system, if the spec
 
 In the event of success, observer's *next* handler receives data of type **ZeroConf**. Furthermore, in the event of failure, the *error* handler receives a **zeroConfError** error code. Both **ZeroConf** and **zeroConfError** can be imported using one of the above-mentioned ways from **nativescript-dna-netservices**.
 
+**resolve**: Performs a resolve process for the service of a given type and name in a specified domain. If the service is available, observer's **next** handler receives **ZeroConf** data which contains socket information and can be used to connect to the service. 
+
+```javascript
+const zeroConfService = new ZeroConfService();
+const registrationSubscription = zeroConfService
+  .resolve({
+    domain: "local.",
+    type: "_my_special_radio_service._tcp.",
+    name: "Radio Service"
+  })
+  .subscribe(data => console.info(data), error => console.error(error));
+```
+
 ## License
 
 Apache License Version 2.0, January 2004
