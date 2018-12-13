@@ -41,7 +41,8 @@ import { NetworkMonitorService } from "nativescript-dna-netservices";
 ```
 JavaScript:
 ```javascript
-var NetworkMonitorService = require("nativescript-dna-netservices");
+const nativescript_dna_netservices = require("nativescript-dna-netservices");
+const NetworkMonitorService = nativescript_dna_netservices.NetworkMonitorService;
 ```
 
 Below are the APIs available in NetworkMonitorService: 
@@ -105,7 +106,8 @@ import { ZeroConfService } from "nativescript-dna-netservices";
 ```
 JavaScript:
 ```javascript
-var ZeroConfService = require("nativescript-dna-netservices");
+const nativescript_dna_netservices = require("nativescript-dna-netservices");
+const ZeroConfService = nativescript_dna_netservices.ZeroConfService;
 ```
 
 Below are the APIs offered by ZeroConfService:
