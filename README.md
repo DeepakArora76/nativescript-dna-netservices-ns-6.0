@@ -143,6 +143,23 @@ const registrationSubscription = zeroConfService
   .subscribe(data => console.info(data), error => console.error(error));
 ```
 
+### - ZeroConfServiceBrowser
+The ZeroConfServiceBrowser class offers a possibility to browser available services in a given domain of a certain type.
+
+Depending on the type of framework, ZeroConfServiceBrowser can be imported using one of the following ways:
+
+TypeScript:
+```javascript
+import { ZeroConfServiceBrowser } from "nativescript-dna-netservices";
+```
+JavaScript:
+```javascript
+const nativescript_dna_netservices = require("nativescript-dna-netservices");
+const ZeroConfServiceBrowser = nativescript_dna_netservices.ZeroConfServiceBrowser;
+```
+
+Below are the APIs offered by ZeroConfServiceBrowser:
+
 ## License
 
 Apache License Version 2.0, January 2004
