@@ -126,7 +126,7 @@ const registrationSubscription = zeroConfService
 
 Note: The API will use one of the available free port in the system, if the specified port is 0.
 
-In the event of success, the *next handler* receives data of type **ZeroConf**. And, in the event of an error, the *error handler* receives a **zeroConfError** error code. Both **ZeroConf** and **zeroConfError** can be imported using one of the above-mentioned ways from **nativescript-dna-netservices**.
+In the event of success, observer's *next* handler receives data of type **ZeroConf**. Furthermore, in the event of failure, the *error* handler receives a **zeroConfError** error code. Both **ZeroConf** and **zeroConfError** can be imported using one of the above-mentioned ways from **nativescript-dna-netservices**.
 
 ## License
 
