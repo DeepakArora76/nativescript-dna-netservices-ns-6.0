@@ -174,4 +174,4 @@ If the services are available, observer's **next** handler will be invoked multi
 
 ## License
 
-Apache License Version 2.0, January 2004
+MIT license (see LICENSE file)
