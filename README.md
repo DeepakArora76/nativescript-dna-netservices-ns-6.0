@@ -169,7 +169,7 @@ const subscription = zeroConfServiceBrowser
     .subscribe(data => console.info(data), error => console.error(error));
 ```
 
-If the services are available, observer's **next** handler will be invoked multiple times with **ZeroConf** data which your application can use to **resolve** to socket info to make connection.
+If the services are available, observer's **next** handler will be invoked multiple times with **ZeroConf** data which your application can use to **resolve** to socket info to make network connection.
 
 
 ## License
