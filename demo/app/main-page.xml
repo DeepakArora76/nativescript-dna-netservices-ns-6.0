@@ -1,0 +1,12 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
+  xmlns:ui="nativescript-dna-netservices">
+  <StackLayout class="p-20">
+    <Label text= "{{ message }}" class="t-20 text-center c-black" textWrap="true"/>
+    <Label text= "{{ networkStatus }}" class="t-20 text-center c-black" textWrap="true"/>
+    <Button text="Browse Service" tap="{{ onBrowseServiceTap }}" class="btn btn-primary btn-active" />
+    <Button text="WiFi IP Address" tap="{{ onWifiIpAddressTap }}" class="btn btn-primary btn-active" />
+    <Button text="Subscribe Network Status" tap="{{ onSubscribeToNetworkStatusTap }}" class="btn btn-primary btn-active" />
+    <Button text="Resolve Service" tap="{{ onResolveServiceTap }}" class="btn btn-primary btn-active" />
+    <Button text="Register Service" tap="{{ onRegisterServiceTap }}" class="btn btn-primary btn-active" />
+  </StackLayout>
+</Page>
