@@ -130,7 +130,7 @@ Note: The API will use one of the available free port in the system, if the spec
 
 In the event of success, observer's *next* handler receives data of type **ZeroConf**. Furthermore, in the event of failure, the *error* handler receives a **zeroConfError** error code. Both **ZeroConf** and **zeroConfError** can be imported using one of the above-mentioned ways from **nativescript-dna-netservices**.
 
-**resolve**: Performs a resolve process for the service of a given type and name in a specified domain. If the service is available, observer's **next** handler receives **ZeroConf** data which contains socket information for your application to connect to the service. 
+**resolve**: Performs a resolve process for the service of a given type and name within a specified domain. If the service is available, observer's **next** handler receives **ZeroConf** data which contains socket information for your application to connect to the service. 
 
 ```javascript
 const zeroConfService = new ZeroConfService();
@@ -144,7 +144,7 @@ const registrationSubscription = zeroConfService
 ```
 
 ### - ZeroConfServiceBrowser
-The ZeroConfServiceBrowser class offers a possibility to browser available services in a given domain of a certain type.
+The ZeroConfServiceBrowser class offers a possibility to browse services of a certain type within a given domain.
 
 Depending on the type of framework, ZeroConfServiceBrowser can be imported using one of the following ways:
 
@@ -159,6 +159,15 @@ const ZeroConfServiceBrowser = nativescript_dna_netservices.ZeroConfServiceBrows
 ```
 
 Below are the APIs offered by ZeroConfServiceBrowser:
+
+**searchForServicesOfTypeInDomain**: Starts a search for services of a particular type within a specific domain.
+
+```javascript
+const zeroConfServiceBrowser = new ZeroConfServiceBrowser();
+const subscription = zeroConfServiceBrowser
+    .searchForServicesOfTypeInDomain("_my_special_radio_service._tcp", "local.")
+    .subscribe(data => console.info(data), error => console.error(error));
+```
 
 ## License
 
