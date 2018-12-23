@@ -33,7 +33,7 @@ export class ZeroConfService {
     return Observable.create((observer: Observer<ZeroConf>) => {
       this._dnaNSNetServiceDelegate.initWithObserver(observer);
       this._netService.publish();
-      return () => this._netService.stop();
+      return () => this.stop();
     });
   }
 
@@ -46,16 +46,16 @@ export class ZeroConfService {
     return this.resolveWithTimeout(9000);
   }
 
-  stop(): void {
-    this._netService.stop();
-  }
-
   private resolveWithTimeout(timeout: number): Observable<ZeroConf> {
     return Observable.create((observer: Observer<ZeroConf>) => {
       this._dnaNSNetServiceDelegate.initWithObserver(observer);
       this._netService.resolveWithTimeout(timeout);
-      return () => this._netService.stop();
+      return () => this.stop();
     });
+  }
+
+  private stop(): void {
+    this._netService.stop();
   }
 
   private availablePort(): number {
@@ -110,7 +110,9 @@ class ZeroConfServiceDelegate extends NSObject implements NSNetServiceDelegate {
     errorDict: NSDictionary<string, number>
   ): void {
     const errCode = Number(errorDict.objectForKey("NSNetServicesErrorCode"));
-    this._observer.error(errCode);
+    const status = zeroConfStatus.failed;
+    const zc = ZeroConfServiceDelegate.getZeroConf(status, sender);
+    this._observer.error({ errorCode: errCode, zeroConf: zc });
   }
 
   netServiceDidNotResolve(
@@ -118,21 +120,14 @@ class ZeroConfServiceDelegate extends NSObject implements NSNetServiceDelegate {
     errorDict: NSDictionary<string, number>
   ): void {
     const errCode = Number(errorDict.objectForKey("NSNetServicesErrorCode"));
-    this._observer.error(errCode);
+    const status = zeroConfStatus.failed;
+    const zc = ZeroConfServiceDelegate.getZeroConf(status, sender);
+    this._observer.error({ errorCode: errCode, zeroConf: zc });
   }
 
   netServiceDidPublish(sender: NSNetService): void {
     const status = zeroConfStatus.success;
-    this._observer.next(
-      new ZeroConf({
-        status: status,
-        domain: sender.domain,
-        type: sender.type,
-        port: sender.port,
-        name: sender.name,
-        hostName: sender.hostName
-      })
-    );
+    this._observer.next(ZeroConfServiceDelegate.getZeroConf(status, sender));
   }
 
   netServiceDidResolveAddress(sender: NSNetService): void {
@@ -167,35 +162,41 @@ class ZeroConfServiceDelegate extends NSObject implements NSNetServiceDelegate {
 
     if (addrs.length) {
       const status = zeroConfStatus.success;
-      this._observer.next(
-        new ZeroConf({
-          status: status,
-          domain: sender.domain,
-          type: sender.type,
-          hostName: sender.hostName,
-          name: sender.name,
-          port: sender.port,
-          addresses: addrs
-        })
-      );
+      let zc = ZeroConfServiceDelegate.getZeroConf(status, sender, addrs);
+      this._observer.next(zc);
     }
   }
 
   netServiceDidStop?(sender: NSNetService): void {
     const status = zeroConfStatus.serviceEnds;
     this._observer.next(new ZeroConf({ status }));
-    this._observer.complete();
   }
 
   netServiceDidUpdateTXTRecordData(sender: NSNetService, data: NSData): void {}
 
   netServiceWillPublish(sender: NSNetService): void {
     const status = zeroConfStatus.serviceBegins;
-    this._observer.next(new ZeroConf({ status }));
+    this._observer.next(ZeroConfServiceDelegate.getZeroConf(status, sender));
   }
 
   netServiceWillResolve(sender: NSNetService): void {
     const status = zeroConfStatus.serviceBegins;
-    this._observer.next(new ZeroConf({ status }));
+    this._observer.next(ZeroConfServiceDelegate.getZeroConf(status, sender));
+  }
+
+  private static getZeroConf(
+    status: zeroConfStatus,
+    sender: NSNetService,
+    addresses?: IAddress[]
+  ): ZeroConf {
+    return new ZeroConf({
+      status: status,
+      domain: sender.domain,
+      type: sender.type,
+      hostName: sender.hostName,
+      name: sender.name,
+      port: sender.port,
+      addresses: addresses
+    });
   }
 }

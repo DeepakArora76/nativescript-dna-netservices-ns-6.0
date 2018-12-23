@@ -1,3 +1,5 @@
+
+
 # NativeScript DNA NetServices
 
 ![nativescript-dna-netservices](https://raw.githubusercontent.com/DeepakArora76/nativescript-dna-netservices/master/dna-netservices.png)
@@ -126,11 +128,11 @@ const registrationSubscription = zeroConfService
   .subscribe(data => console.info(data), error => console.error(error));
 ```
 
-Note: The API will use one of the available free port in the system, if the specified port is 0.
+ - **Note**: *The API will use one of the available free port in the system, if the specified port is 0.*
 
-In the event of success, observer's *next* handler receives data of type **ZeroConf**. Furthermore, in the event of failure, the *error* handler receives a **zeroConfError** error code. Both **ZeroConf** and **zeroConfError** can be imported using one of the above-mentioned ways from **nativescript-dna-netservices**.
+In the event of success, observer's *next* handler receives data of type **ZeroConf**. Furthermore, in the event of failure, the *error* handler receives an error object which looks like **{** ***errorCode***: **zeroConfError**, ***zeroConf***: **ZeroConf** **}**.  Both **ZeroConf** and **zeroConfError** can be imported using one of the above-mentioned ways from **nativescript-dna-netservices**.
 
-**resolve**: Performs a resolve process for the service of a given type and name within a specified domain. If the service is available, observer's **next** handler receives **ZeroConf** data which contains socket information for your application to connect to the service. 
+**resolve**: Performs a resolve process for the service of a given type and name within a specified domain. If the service is available, observer's **next** handler receives **ZeroConf** data which contains socket information for your application to connect to the service.  In the event of failure, the *error* handler receives an error object which looks like **{** ***errorCode***: **zeroConfError**, ***zeroConf***: **ZeroConf** **}**. 
 
 ```javascript
 const zeroConfService = new ZeroConfService();
@@ -169,8 +171,35 @@ const subscription = zeroConfServiceBrowser
     .subscribe(data => console.info(data), error => console.error(error));
 ```
 
-If the services are available, observer's **next** handler will be invoked multiple times with **ZeroConf** data which your application can use to **resolve** to socket info to make network connection.
+If the services are available, observer's **next** handler will be invoked multiple times with **ZeroConf** data which your application can use to **resolve** to socket info to make network connection. And, if there is an error, the *error* handler receives a **zeroConfError** error code.
 
+## Combining *ZeroConfService* & *ZeroConfServiceBrowser*
+Sometimes functionalities from these services can be combined together to create new purposes.
+One of the use cases is to have socket information for every browsed service. To accomplish this, RxJS pipeable operators come in handy. Below is the sample snippet illustrating the same. 
+```javascript
+const patternToSearch = /^radio_channel/i;
+const serviceFinderTimeout = timer(3000);
+const serviceFinder = zeroConfServiceBrowser
+  .searchForServicesOfTypeInDomain("_my_special_radio_service._tcp", "local.")
+  .pipe(
+    filter(service => service.name && service.name.match(patternToSearch).length > 0),
+    distinct(),
+    concatMap(service =>
+      zeroConfService.resolve(service).pipe(
+        filter(service => service.status === zeroConfStatus.success),
+        take(1),
+        observeOn(asyncScheduler)
+      )
+    ),
+    takeUntil(serviceFinderTimeout)
+  );
+
+serviceFinder.subscribe(
+  service => console.info(service),
+  error => console.error(error),
+  () => console.info("Completed Here...")
+);
+```
 
 ## License
 

@@ -14,7 +14,7 @@ export class ZeroConfServiceBrowser {
         observer
       );
       this._netServiceBrowser.searchForBrowsableDomains();
-      return () => this._netServiceBrowser.stop();
+      return () => this.stop();
     });
   }
 
@@ -24,7 +24,7 @@ export class ZeroConfServiceBrowser {
         observer
       );
       this._netServiceBrowser.searchForRegistrationDomains();
-      return () => this._netServiceBrowser.stop();
+      return () => this.stop();
     });
   }
 
@@ -39,14 +39,14 @@ export class ZeroConfServiceBrowser {
         );
 
         this._netServiceBrowser.searchForServicesOfTypeInDomain(type, domain);
-        return () => this._netServiceBrowser.stop();
+        return () => this.stop();
       }
     );
 
     return obserable;
   }
 
-  stop(): void {
+  private stop(): void {
     this._netServiceBrowser.stop();
   }
 }
@@ -106,8 +106,10 @@ class ZeroConfServiceBrowserDelegate extends NSObject
     browser: NSNetServiceBrowser,
     errorDict: NSDictionary<string, number>
   ): void {
+    const errCode = Number(errorDict.objectForKey("errorCode"));
     const status = zeroConfStatus.failed;
-    this._observer.next(new ZeroConf({ status }));
+    const zc = new ZeroConf({ status });
+    this._observer.error({ errorCode: errCode, zeroConf: zc});
   }
 
   netServiceBrowserDidRemoveDomainMoreComing?(
@@ -148,8 +150,6 @@ class ZeroConfServiceBrowserDelegate extends NSObject
   netServiceBrowserDidStopSearch?(browser: NSNetServiceBrowser): void {
     const status = zeroConfStatus.serviceEnds;
     this._observer.next(new ZeroConf({ status }));
-
-    this._observer.complete();
   }
 
   netServiceBrowserWillSearch?(browser: NSNetServiceBrowser): void {

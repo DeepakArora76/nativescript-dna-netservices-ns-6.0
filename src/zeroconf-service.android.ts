@@ -31,7 +31,7 @@ export class ZeroConfService {
     port: number;
   }): Observable<ZeroConf> {
     if (o.port === 0) {
-      const port = this.availablePort();
+      const port = ZeroConfService.availablePort();
       if (port < 0) throwError(zeroConfError.failedToFindAvailablePort);
       else o.port = port;
     }
@@ -48,13 +48,22 @@ export class ZeroConfService {
         .build();
 
       const onNext = new io.reactivex.functions.Consumer({
-        accept: bonjourService =>
-          observer.next(this.makeZeroConf(bonjourService))
+        accept: bonjourService => {
+          const status = zeroConfStatus.success;
+          observer.next(ZeroConfService.getZeroConf(status, bonjourService));
+        }
       });
 
       const onError = new io.reactivex.functions.Consumer({
-        accept: function(ec) {
-          observer.error(mapError(ec));
+        accept: ec => {
+          const zc = new ZeroConf({
+            status: zeroConfStatus.failed,
+            domain: o.domain,
+            type: o.type,
+            name: o.name,
+            port: o.port
+          });
+          observer.error({ errorCode: mapError(ec), zeroConf: zc });
         }
       });
 
@@ -70,7 +79,15 @@ export class ZeroConfService {
     });
 
     return observable.pipe(
-      startWith(new ZeroConf({ status: zeroConfStatus.serviceBegins }))
+      startWith(
+        new ZeroConf({
+          status: zeroConfStatus.serviceBegins,
+          domain: o.domain,
+          type: o.type,
+          name: o.name,
+          port: o.port
+        })
+      )
     );
   }
 
@@ -85,13 +102,37 @@ export class ZeroConfService {
       });
 
       const onNext = new io.reactivex.functions.Consumer({
-        accept: bonjourService =>
-          observer.next(this.makeZeroConf(bonjourService))
+        accept: bonjourService => {
+          let addrs: IAddress[] = [];
+
+          if (bonjourService.getInet4Address()) {
+            const address = bonjourService.getInet4Address().getHostAddress();
+            if (address)
+              addrs.push({ address: address, type: addressType.IPv4 });
+          }
+
+          if (bonjourService.getInet6Address()) {
+            const address = bonjourService.getInet6Address().getHostAddress();
+            if (address)
+              addrs.push({ address: address, type: addressType.IPv6 });
+          }
+
+          const status = zeroConfStatus.success;
+          observer.next(
+            ZeroConfService.getZeroConf(status, bonjourService, addrs)
+          );
+        }
       });
 
       const onError = new io.reactivex.functions.Consumer({
         accept: ec => {
-          observer.error(mapError(ec));
+          const zc = new ZeroConf({
+            status: zeroConfStatus.failed,
+            domain: o.domain,
+            type: o.type,
+            name: o.name
+          });
+          observer.error({ errorCode: mapError(ec), zeroConf: zc });
         }
       });
 
@@ -111,29 +152,28 @@ export class ZeroConfService {
     });
 
     return observable.pipe(
-      startWith(new ZeroConf({ status: zeroConfStatus.serviceBegins }))
+      startWith(
+        new ZeroConf({
+          status: zeroConfStatus.serviceBegins,
+          domain: o.domain,
+          type: o.type,
+          name: o.name
+        })
+      )
     );
   }
 
-  stop(): void {
+  private stop(): void {
     console.assert(false, "On Android stop api is not implemented.");
   }
 
-  private makeZeroConf(bonjourService: any): ZeroConf {
-    let addrs: IAddress[] = [];
-
-    if (bonjourService.getInet4Address()) {
-      let address = bonjourService.getInet4Address().getHostAddress();
-      if (address) addrs.push({ address: address, type: addressType.IPv4 });
-    }
-
-    if (bonjourService.getInet6Address()) {
-      let address = bonjourService.getInet6Address().getHostAddress();
-      if (address) addrs.push({ address: address, type: addressType.IPv6 });
-    }
-
+  private static getZeroConf(
+    status: zeroConfStatus,
+    bonjourService: any,
+    addrs?: IAddress[]
+  ): ZeroConf {
     return new ZeroConf({
-      status: zeroConfStatus.success,
+      status: status,
       domain: bonjourService.getDomain(),
       type: bonjourService.getRegType(),
       hostName: bonjourService.getHostname(),
@@ -143,7 +183,7 @@ export class ZeroConfService {
     });
   }
 
-  private availablePort(): number {
+  private static availablePort(): number {
     let socket: java.net.ServerSocket = null;
     try {
       socket = new java.net.ServerSocket(0);

@@ -15,7 +15,7 @@ export declare class ZeroConfService {
         type: string;
         name: string;
     }): Observable<ZeroConf>;
-    stop(): void;
     private resolveWithTimeout;
+    private stop;
     private availablePort;
 }

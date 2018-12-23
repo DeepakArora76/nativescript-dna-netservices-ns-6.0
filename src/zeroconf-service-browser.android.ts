@@ -88,7 +88,11 @@ export class ZeroConfServiceBrowser {
     });
 
     return observable.pipe(
-      startWith(new ZeroConf({ status: zeroConfStatus.serviceBegins }))
+      startWith(new ZeroConf({
+        status: zeroConfStatus.serviceBegins,
+        type: type,
+        domain: domain
+      }))
     );
   }
 

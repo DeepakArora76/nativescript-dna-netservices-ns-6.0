@@ -14,7 +14,7 @@ export declare class ZeroConfService {
         type: string;
         name: string;
     }): Observable<ZeroConf>;
-    stop(): void;
-    private makeZeroConf;
-    private availablePort;
+    private stop;
+    private static getZeroConf;
+    private static availablePort;
 }

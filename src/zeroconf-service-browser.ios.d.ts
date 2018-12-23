@@ -6,5 +6,5 @@ export declare class ZeroConfServiceBrowser {
     searchForBrowsableDomains(): Observable<ZeroConf>;
     searchForRegistrationDomains(): Observable<ZeroConf>;
     searchForServicesOfTypeInDomain(type: string, domain: string): Observable<ZeroConf>;
-    stop(): void;
+    private stop;
 }
