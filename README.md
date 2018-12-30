@@ -114,7 +114,7 @@ const ZeroConfService = nativescript_dna_netservices.ZeroConfService;
 
 Below are the APIs offered by ZeroConfService:
 
-**publish**: Provides a convenient way for publishing a network service of type *type* at the socket location specified by *domain*, *name*, and *port*.
+**publish**: Provides a convenient way for publishing a network service of type *type* at the socket location specified by *domain*, *name*, and *port*. In the event of success, observer's *next* handler receives data of type **ZeroConf**. Furthermore, in the event of failure, the *error* handler receives an error object which looks like **{** ***errorCode***: **zeroConfError**, ***zeroConf***: **ZeroConf** **}**.  Both **ZeroConf** and **zeroConfError** can be imported using one of the above-mentioned ways from **nativescript-dna-netservices**.
 
 ```javascript
 const zeroConfService = new ZeroConfService();
@@ -129,8 +129,6 @@ const registrationSubscription = zeroConfService
 ```
 
  - **Note**: *The API will use one of the available free port in the system, if the specified port is 0.*
-
-In the event of success, observer's *next* handler receives data of type **ZeroConf**. Furthermore, in the event of failure, the *error* handler receives an error object which looks like **{** ***errorCode***: **zeroConfError**, ***zeroConf***: **ZeroConf** **}**.  Both **ZeroConf** and **zeroConfError** can be imported using one of the above-mentioned ways from **nativescript-dna-netservices**.
 
 **resolve**: Performs a resolve process for the service of a given type and name within a specified domain. If the service is available, observer's **next** handler receives **ZeroConf** data which contains socket information for your application to connect to the service.  In the event of failure, the *error* handler receives an error object which looks like **{** ***errorCode***: **zeroConfError**, ***zeroConf***: **ZeroConf** **}**. 
 
