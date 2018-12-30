@@ -1,9 +1,14 @@
-import { Observable, from, of, throwError } from "rxjs";
+import { Observable, from, of, throwError, Observer } from "rxjs";
 import { finalize, flatMap, catchError } from "rxjs/operators";
 import { android as androidApp } from "tns-core-modules/application";
 import * as Connectivity from "tns-core-modules/connectivity";
 import * as Permissions from "nativescript-permissions";
-import { networkType, NetworkStatus } from "./netservice.common";
+import {
+  addressType,
+  networkType,
+  NetworkStatus,
+  IAddress
+} from "./netservice.common";
 
 export class NetworkMonitorService {
   public static monitorNetwork(): Observable<NetworkStatus> {
@@ -65,7 +70,9 @@ export class NetworkMonitorService {
           java.net.NetworkInterface.getNetworkInterfaces()
         );
         for (let i = 0; i < interfaces.size(); i++) {
-          const addrs = javaCollections.list(interfaces.get(i).getInetAddresses());
+          const addrs = javaCollections.list(
+            interfaces.get(i).getInetAddresses()
+          );
           for (let a = 0; a < addrs.size(); a++) {
             if (!addrs.get(a).isLoopbackAddress()) {
               observer.next(addrs.get(a).getHostAddress());
@@ -87,6 +94,49 @@ export class NetworkMonitorService {
   static getNetworkStatus(): Observable<NetworkStatus> {
     return NetworkMonitorService.getNetworkStatusFromType(
       Connectivity.getConnectionType()
+    );
+  }
+
+  static dumpIpAddress(): Observable<IAddress[]> {
+    const ipAddrObserable: Observable<IAddress[]> = Observable.create(
+      (observer: Observer<IAddress[]>) => {
+        let addresses: IAddress[] = [];
+
+        const NI = java.net.NetworkInterface;
+        try {
+          for (let en = NI.getNetworkInterfaces(); en.hasMoreElements(); ) {
+            let intf = en.nextElement();
+            for (let adr = intf.getInetAddresses(); adr.hasMoreElements(); ) {
+              const inetAddress = adr.nextElement();
+              {
+                let ipAddr = inetAddress.getHostAddress().toString();
+                const pos = ipAddr.search("%");
+                if (pos !== -1) ipAddr = ipAddr.substr(0, pos);
+
+                const displayName = intf.getDisplayName();
+
+                const type =
+                  inetAddress.getClass() === java.net.Inet4Address.class
+                    ? addressType.IPv4
+                    : addressType.IPv6;
+
+                addresses.push({
+                  address: ipAddr,
+                  adapterName: displayName,
+                  type: type
+                });
+              }
+            }
+          }
+        } catch (ex) {}
+
+        observer.next(addresses);
+        observer.complete();
+      }
+    );
+
+    return NetworkMonitorService.requestNetworkPermission().pipe(
+      flatMap(() => ipAddrObserable)
     );
   }
 

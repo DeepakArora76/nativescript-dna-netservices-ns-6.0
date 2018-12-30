@@ -65,6 +65,7 @@ export enum addressType {
 export interface IAddress {
   address: string;
   type: addressType;
+  adapterName?: string;
 }
 
 export interface IZeroConf {

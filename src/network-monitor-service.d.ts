@@ -1,8 +1,9 @@
 import { Observable } from "rxjs";
-import { NetworkStatus } from "./netservice.common";
+import { NetworkStatus, IAddress } from "./netservice.common";
 export declare class NetworkMonitorService {
     static monitorNetwork(): Observable<NetworkStatus>;
     static getWiFiIpAddress(): Observable<string>;
     static getCellularIpAddress(): Observable<string>;
     static getNetworkStatus(): Observable<NetworkStatus>;
+    static dumpIpAddress(): Observable<IAddress[]>;
 }
