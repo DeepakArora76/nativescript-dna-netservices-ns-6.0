@@ -11,7 +11,7 @@ export class ZeroConfService {
   private _dnaNSNetServiceDelegate: ZeroConfServiceDelegate;
 
   constructor() {
-    this._netService = NSNetService.new();
+    this._netService = NSNetService.alloc();
     this._dnaNSNetServiceDelegate = ZeroConfServiceDelegate.new();
     this._netService.delegate = this._dnaNSNetServiceDelegate;
   }
